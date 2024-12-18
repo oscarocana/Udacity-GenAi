@@ -152,3 +152,79 @@ for epoch in range(3):
 
 assert abs(loss.item() - 2.3) < 0.1, "the loss should be around 2.3 with random data"
 # Great job! Now you know the basics of PyTorch! Let's turn to HuggingFace 🤗.
+
+"""
+Get to know HuggingFace
+HuggingFace is a popular destination for pre-trained models and datasets that can be applied to a variety of tasks quickly and easily. In this section, we will explore the capabilities of HuggingFace and learn how to use it to build and train neural networks.
+
+Download a model from HuggingFace and use it for sentiment analysis
+HuggingFace provides a number of pre-trained models that can be used for a variety of tasks. In this exercise, we will use the distilbert-base-uncased-finetuned-sst-2-english model to perform sentiment analysis on a movie review.
+
+Instructions:
+
+Review the AutoModel tutorial on the HuggingFace website.
+Instantiate an AutoModelForSequenceClassification model using the distilbert-base-uncased-finetuned-sst-2-english model.
+Instantiate an AutoTokenizer using the distilbert-base-uncased-finetuned-sst-2-english model.
+Define a function that will get a prediction
+# Replace <MASK> with the appropriate code to complete the exercise.
+"""
+​
+# Get the model and tokenizer
+​
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+import torch
+​
+pt_model =  AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased-finetuned-sst-2-english")
+tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased-finetuned-sst-2-english") 
+​
+​
+def get_prediction(review):
+    """Given a review, return the predicted sentiment"""
+​
+     # Ensure the review is a string
+    if not isinstance(review, str):
+        raise ValueError("The review must be a string.")
+​
+    # Tokenize the review
+    # (Get the response as tensors and not as a list)
+    inputs = tokenizer(review, return_tensors='pt',padding=True, truncation=True)
+​
+    # Perform the prediction (get the logits)
+    outputs = pt_model(**inputs)
+​
+    # Get the predicted class (corresponding to the highest logit)
+    predictions = torch.argmax(outputs.logits, dim=-1)
+​
+    return "positive" if predictions.item() == 1 else "negative"
+# Check
+
+review = "This movie is not so great :("
+
+print(f"Review: {review}")
+print(f"Sentiment: {get_prediction(review)}")
+
+assert get_prediction(review) == "negative", "The prediction should be negative"
+
+
+review = "This movie rocks!"
+
+print(f"Review: {review}")
+print(f"Sentiment: {get_prediction(review)}")
+
+assert get_prediction(review) == "positive", "The prediction should be positive"
+# Check
+​
+review = "This movie is not so great :("
+​
+print(f"Review: {review}")
+print(f"Sentiment: {get_prediction(review)}")
+​
+assert get_prediction(review) == "negative", "The prediction should be negative"
+​
+​
+review = "This movie rocks!"
+​
+print(f"Review: {review}")
+print(f"Sentiment: {get_prediction(review)}")
+​
+assert get_prediction(review) == "positive", "The prediction should be positive"
