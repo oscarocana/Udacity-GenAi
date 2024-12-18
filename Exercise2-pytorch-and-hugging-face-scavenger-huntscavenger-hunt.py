@@ -228,3 +228,80 @@ print(f"Review: {review}")
 print(f"Sentiment: {get_prediction(review)}")
 ​
 assert get_prediction(review) == "positive", "The prediction should be positive"
+
+"""
+Download a dataset from HuggingFace
+HuggingFace provides a number of datasets that can be used for a variety of tasks. In this exercise, we will use the imdb dataset and pass it to the model we instantiated in the previous exercise.
+
+Instructions:
+
+Review the loading a dataset documentation
+Fill in the blanks
+"""
+
+# Replace <MASK> with the appropriate code
+​
+from datasets import load_dataset
+​
+# Load the test split of the imdb dataset
+dataset = load_dataset("imdb", split="test")
+​
+dataset
+
+# Check
+
+from pprint import pprint
+
+from datasets import Dataset
+
+assert isinstance(dataset, Dataset), "The dataset should be a Dataset object"
+assert set(dataset.features.keys()) == {
+    "label",
+    "text",
+}, "The dataset should have a label and a text feature"
+
+# Show the first example
+pprint(dataset[0])
+
+"""
+Now let's use the pre-trained model!
+Let's make some predictions.
+
+Instructions:
+
+Fill in the blanks
+# Replace <MASK> with the appropriate code
+"""
+
+# Get the last 3 reviews
+reviews = dataset["text"][-3:]
+
+# Get the last 3 labels
+labels = dataset["label"][-3:]
+
+# Check
+for review, label in zip(reviews, labels):
+    # Let's use your get_prediction function to get the sentiment
+    # of the review!
+    prediction = get_prediction(review)
+
+    print(f"Review: {review[:80]} \n... {review[-80:]}")
+    print(f'Label: {"positive" if label else "negative"}')
+    print(f"Prediction: {prediction}\n")
+# Replace <MASK> with the appropriate code
+​
+# Get the last 3 reviews
+reviews = dataset["text"][-3:]
+​
+# Get the last 3 labels
+labels = dataset["label"][-3:]
+​
+# Check
+for review, label in zip(reviews, labels):
+    # Let's use your get_prediction function to get the sentiment
+    # of the review!
+    prediction = get_prediction(review)
+​
+    print(f"Review: {review[:80]} \n... {review[-80:]}")
+    print(f'Label: {"positive" if label else "negative"}')
+    print(f"Prediction: {prediction}\n")
