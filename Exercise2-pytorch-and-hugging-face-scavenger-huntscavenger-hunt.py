@@ -1,7 +1,7 @@
-PyTorch tensors
-Scan through the PyTorch tensors documentation here. Be sure to look at the examples.
+# PyTorch tensors
+# Scan through the PyTorch tensors documentation here. Be sure to look at the examples.
 
-In the following cell, create a tensor named my_tensor of size 3x3 with values of your choice. The tensor should be created on the GPU if available. Print the tensor.
+# In the following cell, create a tensor named my_tensor of size 3x3 with values of your choice. The tensor should be created on the GPU if available. Print the tensor.
 
 # Fill in the missing parts labelled <MASK> with the appropriate code to complete the exercise.
 ​
