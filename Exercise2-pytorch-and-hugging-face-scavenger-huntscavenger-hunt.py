@@ -27,31 +27,23 @@ assert my_tensor.device.type in {"cuda", "cpu"}
 assert my_tensor.shape == (3, 3)
 ​
 print("Success!")
----------------------------------------------------------------------------
-AttributeError                            Traceback (most recent call last)
-Cell In[7], line 3
-      1 # Check the previous cell
-----> 3 assert my_tensor.device.type in {"cuda", "cpu"}
-      4 assert my_tensor.shape == (3, 3)
-      6 print("Success!")
 
-AttributeError: 'list' object has no attribute 'device'
 
-Neural Net Constructor Kit torch.nn
-You can think of the torch.nn (documentation) module as a constructor kit for neural networks. It provides the building blocks for creating neural networks, including layers, activation functions, loss functions, and more.
+# Neural Net Constructor Kit torch.nn
+# You can think of the torch.nn (documentation) module as a constructor kit for neural networks. It provides the building blocks for creating neural networks, including layers, activation functions, loss functions, and more.
 
-Instructions:
+# Instructions:
 
-Create a three layer Multi-Layer Perceptron (MLP) neural network with the following specifications:
+# Create a three layer Multi-Layer Perceptron (MLP) neural network with the following specifications:
 
-Input layer: 784 neurons
-Hidden layer: 128 neurons
-Output layer: 10 neurons
-Use the ReLU activation function for the hidden layer and the softmax activation function for the output layer. Print the neural network.
+# Input layer: 784 neurons
+# Hidden layer: 128 neurons
+# Output layer: 10 neurons
+# Use the ReLU activation function for the hidden layer and the softmax activation function for the output layer. Print the neural network.
 
-Hint: MLP's use "fully-connected" or "dense" layers. In PyTorch's nn module, this type of layer has a different name. See the examples in this tutorial to find out more.
+# Hint: MLP's use "fully-connected" or "dense" layers. In PyTorch's nn module, this type of layer has a different name. See the examples in this tutorial to find out more.
 
-U
+
 # Replace <MASK> with the appropriate code to complete the exercise.
 ​
 import torch.nn as nn
@@ -116,3 +108,47 @@ assert isinstance(my_mlp.fc1, nn.Linear)
 ​
 # Check that my_mlp.fc2 is a fully connected layer
 assert isinstance(my_mlp.fc2, nn.Linear)
+
+
+"""
+PyTorch Training Loops
+PyTorch makes writing a training loop easy!
+
+Instructions:
+
+Fill in the blanks!
+y
+# Replace <MASK> with the appropriate code to complete the exercise.
+​
+"""
+
+def fake_training_loaders():
+    for _ in range(30):
+        yield torch.randn(64, 784), torch.randint(0, 10, (64,))
+​
+​
+for epoch in range(3):
+    # Create a training loop
+    for i, data in enumerate(fake_training_loaders()):
+        # Every data instance is an input + label pair
+        x, y = data
+​
+        # Zero your gradients for every batch!
+        optimizer.zero_grad()
+​
+        # Forward pass (predictions)
+        y_pred = model(x)
+​
+        # Compute the loss and its gradients
+        loss = loss_fn(y_pred, y)
+        loss.backward()
+​
+        # Adjust learning weights
+        optimizer.step()
+​
+        if i % 10 == 0:
+            print(f"Epoch {epoch}, batch {i}: {loss.item():.5f}")
+
+
+assert abs(loss.item() - 2.3) < 0.1, "the loss should be around 2.3 with random data"
+# Great job! Now you know the basics of PyTorch! Let's turn to HuggingFace 🤗.
